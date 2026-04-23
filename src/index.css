@@ -1,0 +1,323 @@
+/* ======================================================
+   RESET GENERAL
+   ====================================================== */
+
+/*
+  Eliminamos márgenes por defecto del navegador
+  y definimos una fuente base para toda la app.
+
+  Esto asegura que el diseño sea consistente en
+  todos los navegadores (Chrome, Edge, etc).
+*/
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+/* ======================================================
+   CONTENEDOR PRINCIPAL
+   ====================================================== */
+
+/*
+  Este contenedor ocupa toda la pantalla (100vh)
+  y sirve como base para posicionar la bandera.
+
+  position: relative permite que los elementos internos
+  (como la bandera y la cruz) se posicionen correctamente.
+
+  overflow: hidden evita que elementos sobresalgan.
+*/
+.app {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* ======================================================
+   BANDERA DOMINICANA (ESTRUCTURA REAL)
+   ====================================================== */
+
+/*
+  Creamos la bandera usando CSS Grid.
+
+  Se divide en 4 cuadrantes:
+    [ azul | rojo ]
+    [ rojo | azul ]
+
+  Esto replica la estructura real de la bandera dominicana.
+*/
+.flag {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+/*
+  Colores oficiales aproximados de la bandera.
+  Se usan tonos más realistas que azul/rojo puro.
+*/
+.blue {
+  background: #002D62;
+}
+
+.red {
+  background: #CE1126;
+}
+
+
+/* ======================================================
+   CRUZ BLANCA CENTRAL
+   ====================================================== */
+
+/*
+  La cruz blanca divide la bandera en 4 partes.
+
+  Se crea usando pseudo-elementos (::before y ::after)
+  para evitar agregar más HTML innecesario.
+*/
+.cross::before,
+.cross::after {
+  content: "";
+  position: absolute;
+  background: white;
+  z-index: 1;
+}
+
+/*
+  Línea vertical de la cruz
+*/
+.cross::before {
+  width: 40px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*
+  Línea horizontal de la cruz
+*/
+.cross::after {
+  height: 40px;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/* ======================================================
+   CAPA DE OSCURECIMIENTO (NUEVO - MENÚ Y JUEGO)
+   ====================================================== */
+
+/*
+  PROBLEMA ORIGINAL:
+  - El fondo de la bandera es muy brillante
+  - El texto (menú, botones) pierde legibilidad
+
+  SOLUCIÓN:
+  - Añadimos una capa semitransparente oscura encima
+  - Mejora la visibilidad sin perder el diseño
+
+  IMPORTANTE:
+  - No afecta la lógica del juego
+  - Solo es visual
+*/
+.app::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.25); /* capa oscura */
+
+  z-index: 1;
+}
+
+
+/* ======================================================
+   CONTENIDO DEL JUEGO / MENÚ
+   ====================================================== */
+
+/*
+  Este contenedor está por encima del fondo.
+
+  z-index: 2 asegura que esté sobre:
+  - la bandera
+  - la cruz
+  - la capa oscura
+
+  Flexbox permite centrar todo perfectamente.
+*/
+.content {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  color: white; /* IMPORTANTE para el menú */
+}
+
+
+/* ======================================================
+   TÍTULOS (MEJORA VISUAL)
+   ====================================================== */
+
+/*
+  Sombra para mejorar legibilidad del texto
+  sobre fondo complejo (bandera).
+*/
+h1, h2, h3 {
+  text-shadow: 2px 2px 5px black;
+}
+
+
+/* ======================================================
+   TABLERO
+   ====================================================== */
+
+/*
+  Grid 3x3 para representar el juego.
+*/
+.board {
+  width: 300px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 5px;
+}
+
+
+/* ======================================================
+   CELDAS
+   ====================================================== */
+
+/*
+  Cada celda es un botón interactivo.
+
+  Fondo blanco semitransparente para que
+  se vea la bandera ligeramente detrás.
+*/
+.cell {
+  width: 100px;
+  height: 100px;
+
+  background: rgba(255,255,255,0.85);
+  border: 2px solid black;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+/*
+  Efecto hover:
+
+  - Escala la celda ligeramente
+  - Hace el fondo más sólido
+
+  Esto mejora la sensación de interacción.
+*/
+.cell:hover {
+  transform: scale(1.05);
+  background: white;
+}
+
+
+/* ======================================================
+   BOTONES GENERALES
+   ====================================================== */
+
+/*
+  Estilo base de botones.
+
+  - Bordes redondeados
+  - Color oscuro para contraste
+*/
+button {
+  padding: 10px 20px;
+  margin: 5px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: black;
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/*
+  Hover de botones:
+
+  - Se agrandan ligeramente
+  - Cambian a gris oscuro
+*/
+button:hover {
+  transform: scale(1.05);
+  background: #333;
+}
+
+
+/* ======================================================
+   BOTONES ESPECIALES (OPCIONAL VISUAL)
+   ====================================================== */
+
+/*
+  Puedes usar estas clases si quieres diferenciar
+  visualmente los equipos.
+
+  NO afecta la lógica, solo diseño.
+*/
+button.red {
+  background: #CE1126;
+}
+
+button.blue {
+  background: #002D62;
+}
+
+
+/* ======================================================
+   RESPONSIVE (CELULARES)
+   ====================================================== */
+
+/*
+  Adaptamos el tamaño del tablero y elementos
+  para pantallas pequeñas.
+
+  Esto es clave si quieres subirlo a internet.
+*/
+@media (max-width: 600px) {
+
+  .board {
+    width: 210px;
+  }
+
+  .cell {
+    width: 70px;
+    height: 70px;
+  }
+
+  img {
+    width: 50px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}

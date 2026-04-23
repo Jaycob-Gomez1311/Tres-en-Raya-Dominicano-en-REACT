@@ -1,0 +1,9 @@
+No tengo fechas exactas, pero se puede tomar los días como los momentos en los que hice progreso en esta tarea:
+
+Día 1: Instalación de Node.js y NVM, surgen problemas.
+
+Día 2: Bajo la guía de compañeros y la IA, se logra instalar lo necesario para utilizar REACT.
+
+Día 3: Participación en el grupo que realizó el juego "Adivina el Número" sirve como fuente de conocimiento para este trabajo.
+
+Día 4: Preparación de ideas e inicio del desarrollo del juego "Tres En Raya Dominicano". Se crea el proyecto y se empieza a trabajar en el. El juego se termina de crear después de varios inconvenientes en el proceso de su creación. Se adjuntarán capturas que muestran el progreso.
