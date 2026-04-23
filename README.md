@@ -26,6 +26,8 @@ El juego incluye:
 
 Aunque no se pudo implementar la versión en modo asterisco, el resultado final cumple con una experiencia visual y funcional bastante completa.
 
+El profesor o cualquiera que quiera tener esto en su computadora, notará que faltan el Node. Deberá descargarlo usando el comando npm install para instalar las dependencias correspondientes.
+
 ---
 
 ## 📚 Qué aprendí
